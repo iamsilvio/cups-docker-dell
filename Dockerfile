@@ -2,20 +2,21 @@ FROM debian:stable-slim
 
 # ENV variables
 ENV DEBIAN_FRONTEND noninteractive
-ENV TZ "America/New_York"
+ENV TZ "Etc/UTC"
 ENV CUPSADMIN admin
 ENV CUPSPASSWORD password
 
 
-LABEL org.opencontainers.image.source="https://github.com/anujdatar/cups-docker"
-LABEL org.opencontainers.image.description="CUPS Printer Server"
+LABEL org.opencontainers.image.source="https://github.com/iamsilvio/cups-docker-dell"
+LABEL org.opencontainers.image.description="CUPS Printer Server i386 (DELL 1660)"
 LABEL org.opencontainers.image.author="Anuj Datar <anuj.datar@gmail.com>"
-LABEL org.opencontainers.image.url="https://github.com/anujdatar/cups-docker/blob/main/README.md"
+LABEL org.opencontainers.image.url="https://github.com/iamsilvio/cups-docker-dell/blob/main/README.md"
 LABEL org.opencontainers.image.licenses=MIT
 
+COPY driver/xerox-phaser-6000-6010_1.0-1_i386.deb driver.deb
 
 # Install dependencies
-RUN apt-get update -qq  && apt-get upgrade -qqy \
+RUN apt update -qq  && apt upgrade -qqy \
     && apt-get install -qqy \
     apt-utils \
     usbutils \
@@ -29,9 +30,13 @@ RUN apt-get update -qq  && apt-get upgrade -qqy \
     hpijs-ppds \
     hp-ppd \
     hplip \
-    && apt-get clean \
+    && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Dell c1660 driver
+RUN dpkg -i driver.deb
+
+# Expose CUPS IPP Port
 EXPOSE 631
 
 # Baked-in config file changes
