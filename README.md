@@ -3,7 +3,8 @@
 This is a fork of Anuj Datar [cups-docker](https://github.com/anujdatar/cups-docker) to support the old 32bit drivers of the dell c1660.
 
 Container packages available from Github Container Registry (ghcr.io)
-  - GHCR Image: `ghcr.io/iamsilvio/cups`
+
+- GHCR Image: `ghcr.io/iamsilvio/cups`
 
 ## Usage
 
@@ -26,6 +27,7 @@ docker run -d --name cups \
     -v <persistent-config-folder>:/etc/cups \
     ghcr.io/iamsilvio/cups
 ```
+
 > Note: :P make sure you use valid TZ string, this is just a joke. Also changing the default username and password is highly recommended.
 
 ### Parameters and defaults
@@ -40,12 +42,13 @@ docker run -d --name cups \
 
 Environment variables that can be changed to suit your needs, use the `-e` tag
 | # | Parameter    | Default            | Type   | Description                       |
-| - | ------------ | ------------------ | ------ | --------------------------------- |
-| 1 | TZ           | "America/New_York" | string | Time zone of your server          |
+| - | --- | --- | --- | --- |
+| 1 | TZ          | "America/New_York" | string | Time zone of your server          |
 | 2 | CUPSADMIN    | admin              | string | Name of the admin user for server |
 | 3 | CUPSPASSWORD | password           | string | Password for server admin         |
 
 ### docker-compose
+
 ```yaml
 version: "3"
 services:
@@ -67,9 +70,9 @@ services:
 
 ## Server Administration
 
-You should now be able to access CUPS admin server using the IP address of your headless computer/server http://192.168.xxx.xxx:631, or whatever. If your server has avahi-daemon/mdns running you can use the hostname, http://printer.local:631. (IP and hostname will vary, these are just examples)
+You should now be able to access CUPS admin server using the IP address of your headless computer/server <http://192.168.xxx.xxx:631>, or whatever. If your server has avahi-daemon/mdns running you can use the hostname, <http://printer.local:631>. (IP and hostname will vary, these are just examples)
 
-If you are running this on your PC, i.e. not on a headless server, you should be able to log in on http://localhost:631
+If you are running this on your PC, i.e. not on a headless server, you should be able to log in on <http://localhost:631>
 
 ## Thanks
 
